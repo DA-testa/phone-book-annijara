@@ -9,6 +9,8 @@ class Query:
 
 def read_queries():
     n = int(input())
+    if n < 1 or n > 100000:
+        print("wrong input")
     return [Query(input().split()) for i in range(n)]
 
 def write_responses(result):
@@ -23,17 +25,16 @@ def process_queries(queries):
             # if we already have contact with such number,
             # we should rewrite contact's name
             contacts[cur_query.number] = cur_query.name
-            break
+        
         elif cur_query.type == 'del':
-                    contacts.pop(cur_query.number, None)
-                    break
+            contacts.pop(cur_query.number, None)
+
         else:
-                    if cur_query.number in contacts:
-                         response =  contacts[cur_query.number]
-                    else:
-                         response = 'not found'
-                    result.append(response)
-                    break
+            if cur_query.number in contacts:
+                response = contacts[cur_query.number]
+            else:
+                response = 'not found'
+            result.append(response)
     return result
 
 if __name__ == '__main__':
